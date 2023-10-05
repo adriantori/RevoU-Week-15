@@ -1,21 +1,18 @@
 import { MongoClient, Db } from 'mongodb';
 
-class MongoConnection {
-    private static client: MongoClient;
-    private static db: Db;
+let db: Db;
 
-    static async connect(uri: string, dbName: string): Promise<void> {
-        this.client = new MongoClient(uri);
-        await this.client.connect();
-        this.db = this.client.db(dbName);
-    }
-
-    static getDb(): Db {
-        if (!this.db) {
-            throw new Error('Database connection not established.');
-        }
-        return this.db;
-    }
+async function connect(uri: string, dbName: string): Promise<void> {
+  const client = new MongoClient(uri);
+  await client.connect();
+  db = client.db(dbName);
 }
 
-export default MongoConnection;
+function getDb(): Db {
+  if (!db) {
+    throw new Error('Database connection not established.');
+  }
+  return db;
+}
+
+export { connect, getDb };

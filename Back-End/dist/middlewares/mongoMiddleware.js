@@ -9,21 +9,21 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getDb = exports.connect = void 0;
-const mongodb_1 = require("mongodb");
-let db;
-function connect(uri, dbName) {
+const mongoConnection_1 = require("../configs/mongoConnection");
+function mongoMiddleware(req, res, next) {
     return __awaiter(this, void 0, void 0, function* () {
-        const client = new mongodb_1.MongoClient(uri);
-        yield client.connect();
-        db = client.db(dbName);
+        const uri = 'mongodb+srv://adriantori:adri123@cluster0.3u5txct.mongodb.net/?retryWrites=true&w=majority'; // Replace with your MongoDB URI
+        const dbName = 'RevoU_w15'; // Replace with your actual database name
+        try {
+            yield (0, mongoConnection_1.connect)(uri, dbName);
+            const db = (0, mongoConnection_1.getDb)(); // Get the database instance
+            // Set the database instance on req for use in the next middleware
+            req.db = db;
+            next();
+        }
+        catch (error) {
+            next(error);
+        }
     });
 }
-exports.connect = connect;
-function getDb() {
-    if (!db) {
-        throw new Error('Database connection not established.');
-    }
-    return db;
-}
-exports.getDb = getDb;
+exports.default = mongoMiddleware;

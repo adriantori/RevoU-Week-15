@@ -4,12 +4,14 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const helmet_1 = __importDefault(require("./helmet"));
-const morgan_1 = __importDefault(require("./morgan"));
+const logToMongo_1 = __importDefault(require("./logToMongo"));
 const setRequestId_1 = __importDefault(require("./setRequestId"));
-const mongoConnect_1 = __importDefault(require("./mongoConnect"));
+const mongoMiddleware_1 = __importDefault(require("./mongoMiddleware"));
 exports.default = (app) => {
     (0, helmet_1.default)(app);
     setRequestId_1.default;
-    app.use(mongoConnect_1.default);
-    (0, morgan_1.default)(app);
+    app.use((req, res, next) => {
+        (0, mongoMiddleware_1.default)(req, res, next);
+        (0, logToMongo_1.default)(req, app);
+    });
 };

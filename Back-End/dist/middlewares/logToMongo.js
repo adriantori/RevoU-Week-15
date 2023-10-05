@@ -17,23 +17,27 @@ function logToMongo(req, app) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
             const db = req.db;
+            if (!db) {
+                console.error('Database instance not available.');
+                return;
+            }
             const morganLogsCollection = db.collection('morganLogs');
             const morganStream = {
-                write: (logData) => {
+                write: (logData) => __awaiter(this, void 0, void 0, function* () {
                     try {
                         const parsedLogData = JSON.parse(logData);
                         const logEntry = { log: parsedLogData }; // Modify this based on your log data structure
-                        morganLogsCollection.insertOne(logEntry);
+                        yield morganLogsCollection.insertOne(logEntry);
                     }
                     catch (error) {
-                        console.error('Error parsing Morgan log data:', error);
+                        console.error('Error parsing or logging Morgan log data:', error);
                     }
-                }
+                })
             };
             app.use((0, morgan_1.default)('combined', { stream: morganStream }));
         }
         catch (error) {
-            console.error('Error logging to MongoDB:', error);
+            console.error('Error setting up Morgan for logging to MongoDB:', error);
         }
     });
 }
