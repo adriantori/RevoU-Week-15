@@ -6,6 +6,7 @@ const whitelist =  {
     },
     clientOptionsGlobal : {
         origin: 'https://adriantori-w15-b.vercel.app',
+        methods:['GET','POST','PUT','DELETE']
     }
 }
 
