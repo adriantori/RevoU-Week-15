@@ -12,29 +12,19 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const morgan_1 = __importDefault(require("morgan"));
-function logToMongo(app) {
+const mongoConnection_1 = __importDefault(require("../configs/mongoConnection"));
+function mongoMiddleware(req, res, next) {
     return __awaiter(this, void 0, void 0, function* () {
+        const uri = 'mongodb+srv://adriantori:adri123@cluster0.3u5txct.mongodb.net/?retryWrites=true&w=majority'; // Replace with your MongoDB URI
+        const dbName = 'RevoU_w15'; // Replace with your actual database name
         try {
-            const db = app.locals.db; // Assuming db is set in app.locals by mongoMiddleware
-            const morganLogsCollection = db.collection('morganLogs');
-            const morganStream = {
-                write: (logData) => {
-                    try {
-                        const parsedLogData = JSON.parse(logData);
-                        const logEntry = { log: parsedLogData }; // Modify this based on your log data structure
-                        morganLogsCollection.insertOne(logEntry);
-                    }
-                    catch (error) {
-                        console.error('Error parsing Morgan log data:', error);
-                    }
-                }
-            };
-            app.use((0, morgan_1.default)('combined', { stream: morganStream }));
+            yield mongoConnection_1.default.connect(uri, dbName);
+            req.app.locals.db = mongoConnection_1.default.getDb(); // Store db in app.locals
+            next();
         }
         catch (error) {
-            console.error('Error logging to MongoDB:', error);
+            next(error);
         }
     });
 }
-exports.default = logToMongo;
+exports.default = mongoMiddleware;
