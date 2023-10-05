@@ -27,6 +27,10 @@
                 {
                     "key": "Strict-Transport-Security",
                     "value": "max-age=15552000; includeSubdomains"
+                },
+                {
+                    "key": "Content-Security-Policy",
+                    "value": "frame-ancestors 'none'"
                 }
             ]
         }
