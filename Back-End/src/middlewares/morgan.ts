@@ -1,6 +1,5 @@
 import { Express } from "express";
 import logger from 'morgan';
-import fs from 'fs'
 
 export default (app: Express) => {
     app.use(logger('combined', 
