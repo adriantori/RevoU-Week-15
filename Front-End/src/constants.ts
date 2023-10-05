@@ -1,1 +1,1 @@
-export const BASE_URL = 'http://localhost:8080';
+export const BASE_URL = 'https://adriantori-w15-be.vercel.app';

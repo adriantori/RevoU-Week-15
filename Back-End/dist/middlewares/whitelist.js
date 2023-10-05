@@ -2,11 +2,11 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const whitelist = {
     clientOptionsLimited: {
-        origin: 'http://localhost:5173',
+        origin: ['https://adriantori-w15-a.vercel.app', 'https://adriantori-w15-b.vercel.app'],
         methods: ['GET', 'POST']
     },
     clientOptionsGlobal: {
-        origin: 'http://localhost:600',
+        origin: 'https://adriantori-w15-b.vercel.app',
     }
 };
 exports.default = whitelist;
