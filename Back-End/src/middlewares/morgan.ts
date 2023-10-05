@@ -4,7 +4,7 @@ import fs from 'fs'
 
 export default (app: Express) => {
     app.use(logger('combined', 
-        {stream: fs.createWriteStream('./access.log', {flags: 'a'})} //create file
+        //{stream: fs.createWriteStream('./access.log', {flags: 'a'})} //create file
         //{db.insertOne} //push database
     ))
     app.use(logger('dev'))
