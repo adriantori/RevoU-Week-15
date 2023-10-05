@@ -3,7 +3,6 @@ import cors from 'cors';
 import { simpleGet, simplePost, simplePut, simpleDelete } from '../controllers/simpleController'
 import whitelist from '../middlewares/whitelist';
 
-
 export const simpleRoute = Router();
 
 simpleRoute.get('/get', cors(whitelist.clientOptionsLimited), simpleGet)
