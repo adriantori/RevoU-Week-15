@@ -6,5 +6,5 @@ export default (app: Express) => {
     //     {stream: fs.createWriteStream('./access.log', {flags: 'a'})} //create file
     //     {db.insertOne} //push database
     // ))
-    app.use(logger('dev'))
+    app.use(logger('combined'))
 }
