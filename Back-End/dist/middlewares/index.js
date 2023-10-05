@@ -12,6 +12,6 @@ exports.default = (app) => {
     setRequestId_1.default;
     app.use((req, res, next) => {
         (0, mongoMiddleware_1.default)(req, res, next);
-        (0, logToMongo_1.default)(req, app);
+        (0, logToMongo_1.default)(req);
     });
 };

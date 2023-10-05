@@ -9,6 +9,6 @@ export default (app: Express) => {
   setRequestId;
   app.use((req: Request, res: Response, next: NextFunction) => {
     mongoMiddleware(req, res, next);
-    logToMongo(req, app);
+    logToMongo(req);
   });
 };

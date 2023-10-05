@@ -13,7 +13,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const morgan_1 = __importDefault(require("morgan"));
-function logToMongo(req, app) {
+function logToMongo(req) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
             const db = req.db;
@@ -34,7 +34,8 @@ function logToMongo(req, app) {
                     }
                 })
             };
-            app.use((0, morgan_1.default)('combined', { stream: morganStream }));
+            // Use Morgan with the custom stream
+            (0, morgan_1.default)('combined', { stream: morganStream });
         }
         catch (error) {
             console.error('Error setting up Morgan for logging to MongoDB:', error);

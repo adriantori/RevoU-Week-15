@@ -2,7 +2,7 @@ import { Express, Request } from 'express';
 import { Collection } from 'mongodb';
 import morgan from 'morgan';
 
-async function logToMongo(req: Request, app: Express) {
+async function logToMongo(req: Request) {
   try {
     const db = req.db;
 
@@ -26,7 +26,9 @@ async function logToMongo(req: Request, app: Express) {
       }
     };
 
-    app.use(morgan('combined', { stream: morganStream }));
+    // Use Morgan with the custom stream
+    morgan('combined', { stream: morganStream });
+
   } catch (error: any) {
     console.error('Error setting up Morgan for logging to MongoDB:', error);
   }
