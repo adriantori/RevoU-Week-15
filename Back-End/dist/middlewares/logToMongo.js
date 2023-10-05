@@ -8,38 +8,10 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
-const morgan_1 = __importDefault(require("morgan"));
-function logToMongo(req) {
-    return __awaiter(this, void 0, void 0, function* () {
-        try {
-            const db = req.db;
-            if (!db) {
-                console.error('Database instance not available.');
-                return;
-            }
-            const morganLogsCollection = db.collection('morganLogs');
-            const morganStream = {
-                write: (logData) => __awaiter(this, void 0, void 0, function* () {
-                    try {
-                        const parsedLogData = JSON.parse(logData);
-                        const logEntry = { log: parsedLogData }; // Modify this based on your log data structure
-                        yield morganLogsCollection.insertOne(logEntry);
-                    }
-                    catch (error) {
-                        console.error('Error parsing or logging Morgan log data:', error);
-                    }
-                })
-            };
-            // Use Morgan with the custom stream
-            (0, morgan_1.default)('combined', { stream: morganStream });
-        }
-        catch (error) {
-            console.error('Error setting up Morgan for logging to MongoDB:', error);
-        }
-    });
-}
-exports.default = logToMongo;
+const mongooseMorgan = require('mongoose-morgan');
+exports.default = (app) => __awaiter(void 0, void 0, void 0, function* () {
+    app.use(mongooseMorgan({
+        connectionString: 'mongodb+srv://adriantori:adri123@cluster0.3u5txct.mongodb.net/RevoU_w15?retryWrites=true&w=majority',
+    }));
+});

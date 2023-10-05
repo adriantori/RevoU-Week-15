@@ -1,7 +1,7 @@
 
 const whitelist =  {
     clientOptionsLimited : {
-        origin: ['https://adriantori-w15-a.vercel.app', 'https://adriantori-w15-b.vercel.app'],
+        origin: ['https://adriantori-w15-a.vercel.app', 'https://adriantori-w15-b.vercel.app', 'http://localhost:5173'],
         methods:['GET','POST']
     },
     clientOptionsGlobal : {

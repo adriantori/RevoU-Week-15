@@ -16,7 +16,7 @@ app.get('/', (req, res) => {
 
 const port = PORT;
 app.listen(port, () => {
-    console.log(`Server is runnong on port ${port}`)
+    console.log(`Server is running on port ${port}`)
 });
 
 export default app;
