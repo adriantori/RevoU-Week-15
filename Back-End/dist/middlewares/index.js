@@ -7,7 +7,7 @@ const helmet_1 = __importDefault(require("./helmet"));
 const logToMongo_1 = __importDefault(require("./logToMongo"));
 const setRequestId_1 = __importDefault(require("./setRequestId"));
 exports.default = (app) => {
-    (0, helmet_1.default)(app);
     setRequestId_1.default;
+    (0, helmet_1.default)(app);
     (0, logToMongo_1.default)(app);
 };

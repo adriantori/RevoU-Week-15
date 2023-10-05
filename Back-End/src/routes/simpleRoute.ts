@@ -2,6 +2,8 @@ import { Router } from 'express';
 import cors from 'cors';
 import { simpleGet, simplePost, simplePut, simpleDelete } from '../controllers/simpleController'
 import whitelist from '../middlewares/whitelist';
+import setRequestId from '../middlewares/setRequestId';
+
 
 export const simpleRoute = Router();
 

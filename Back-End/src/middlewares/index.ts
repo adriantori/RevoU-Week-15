@@ -4,8 +4,7 @@ import logToMongo from './logToMongo';
 import setRequestId from './setRequestId';
 
 export default (app: Express) => {
+  setRequestId
   helmet(app);
-  setRequestId;
-
   logToMongo(app);
 };
