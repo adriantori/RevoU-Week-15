@@ -17,3 +17,7 @@ Back-End : https://adriantori-w15-be.vercel.app/
 ## XSS Prevention:
 
 ![](assets/img/README/2023-10-05-21-29-16-image.png)
+
+## Logging in MongoDB:
+
+![](assets/img/README/2023-10-05-21-48-19-image.png)
